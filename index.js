@@ -26,7 +26,7 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/", function (req, res) {
   const currentDate = new Date();
-  const unixTimestamp = Math.floor(currentDate.getTime() / 1000);
+  const unixTimestamp = currentDate.getTime();
   const formattedDate = currentDate.toGMTString();
 
   res.json({unix: unixTimestamp, utc: formattedDate});
@@ -36,7 +36,7 @@ app.get("/api/:date?", function (req, res) {
   const date = req.params.date;
   const validDate = Number(date) == date ? Number(date) : date;
   const currentDate = new Date(validDate);
-  const unixTimestamp = Math.floor(currentDate.getTime() / 1000);
+  const unixTimestamp = currentDate.getTime();
   const formattedDate = currentDate.toGMTString();
   const output = formattedDate === "Invalid Date" ?  { error : "Invalid Date" } : {unix: unixTimestamp, utc: formattedDate}
   res.json(output);
